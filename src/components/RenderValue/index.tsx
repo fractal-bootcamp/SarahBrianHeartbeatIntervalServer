@@ -127,7 +127,7 @@ export default function RenderValue({
   }
   /**We have located the rendering location and are investigating if something like this will work */
   // type ExpandableValue = IVTableCellValueObject & { onExpand: () => void }
-  // //handle labels with onExpands
+  //handle labels with onExpands
   // if (
   //   typeof data === 'object' &&
   //   data &&
@@ -138,6 +138,17 @@ export default function RenderValue({
   //   const expandableCell = data as ExpandableValue
   //   return <a onClick={() => expandableCell.onExpand()}>{valueToString(data.label)}</a>
   // }
+  if (
+    typeof data === 'object' &&
+    data &&
+    'textColor' in data &&
+    typeof data.textColor === 'string' &&
+    'label' in data
+  ) {
+    return (
+      <span style={{ color: data.textColor }}>{valueToString(data.label)}</span>
+    )
+  }
   // handle plain links
   if (typeof data === 'string' && (isUrl(data) || isEmail(data))) {
     const href = isEmail(data) ? `mailto:${data}` : data
