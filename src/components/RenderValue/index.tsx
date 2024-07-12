@@ -125,7 +125,19 @@ export default function RenderValue({
   ) {
     data = data.label
   }
-
+  /**We have located the rendering location and are investigating if something like this will work */
+  // type ExpandableValue = IVTableCellValueObject & { onExpand: () => void }
+  // //handle labels with onExpands
+  // if (
+  //   typeof data === 'object' &&
+  //   data &&
+  //   'onExpand' in data &&
+  //   typeof data.onExpand === 'function' &&
+  //   'label' in data
+  // ) {
+  //   const expandableCell = data as ExpandableValue
+  //   return <a onClick={() => expandableCell.onExpand()}>{valueToString(data.label)}</a>
+  // }
   // handle plain links
   if (typeof data === 'string' && (isUrl(data) || isEmail(data))) {
     const href = isEmail(data) ? `mailto:${data}` : data
