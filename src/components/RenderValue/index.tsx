@@ -9,6 +9,7 @@ import RenderMarkdown, { ALLOWED_INLINE_ELEMENTS } from '../RenderMarkdown'
 import Skeleton from 'react-loading-skeleton'
 import Truncate from '../Truncate'
 import { useIsomorphicLink } from '~/utils/useIsomorphicLocation'
+import ExpandableModalValue from './ExpandableModalValue'
 
 export type RenderableValue = JSONPrimitive | Date | bigint | undefined
 
@@ -108,6 +109,7 @@ export default function RenderValue({
   showSkeleton?: boolean
   shouldTruncate?: boolean
 }) {
+  console.log(value)
   const Link = useIsomorphicLink()
 
   if (isValidElement(value)) {
@@ -126,29 +128,17 @@ export default function RenderValue({
     data = data.label
   }
   /**We have located the rendering location and are investigating if something like this will work */
-  // type ExpandableValue = IVTableCellValueObject & { onExpand: () => void }
-  //handle labels with onExpands
-  // if (
-  //   typeof data === 'object' &&
-  //   data &&
-  //   'onExpand' in data &&
-  //   typeof data.onExpand === 'function' &&
-  //   'label' in data
-  // ) {
-  //   const expandableCell = data as ExpandableValue
-  //   return <a onClick={() => expandableCell.onExpand()}>{valueToString(data.label)}</a>
-  // }
+  // handle labels with onExpands
+
   if (
     typeof data === 'object' &&
     data &&
-    'textColor' in data &&
-    typeof data.textColor === 'string' &&
+    'onExpand' in data &&
     'label' in data
   ) {
-    return (
-      <span style={{ color: data.textColor }}>{valueToString(data.label)}</span>
-    )
+    return <ExpandableModalValue data={data} />
   }
+
   // handle plain links
   if (typeof data === 'string' && (isUrl(data) || isEmail(data))) {
     const href = isEmail(data) ? `mailto:${data}` : data
