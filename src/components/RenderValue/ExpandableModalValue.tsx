@@ -25,7 +25,7 @@ const ExpandableModalValue = ({ data }) => {
             className="relative bg-white rounded-lg shadow-xl w-fit h-fit min-w-[200px] min-h-[150px] flex justify-center items-center"
             onClick={e => e.stopPropagation()}
           >
-            <ObjectViewer data={data.onExpand} collapsible />
+            <ObjectViewer data={data.expandableData} collapsible />
             <CloseIcon
               className="hover:bg-slate-200 rounded-full p-2 w-8 h-8 absolute top-1 right-1"
               onClick={() => setShowModal(false)}

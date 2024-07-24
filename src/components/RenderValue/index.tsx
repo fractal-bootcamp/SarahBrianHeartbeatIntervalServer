@@ -133,7 +133,7 @@ export default function RenderValue({
   if (
     typeof data === 'object' &&
     data &&
-    'onExpand' in data &&
+    'expandableData' in data &&
     'label' in data
   ) {
     return <ExpandableModalValue data={data} />
