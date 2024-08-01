@@ -109,7 +109,6 @@ export default function RenderValue({
   showSkeleton?: boolean
   shouldTruncate?: boolean
 }) {
-  console.log(value)
   const Link = useIsomorphicLink()
 
   if (isValidElement(value)) {
